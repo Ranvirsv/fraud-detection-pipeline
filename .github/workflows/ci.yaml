@@ -1,7 +1,11 @@
 ---
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   build:
@@ -11,16 +15,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: astral-sh/setup-uv@v6
         with:
           python-version: "3.12"
       - name: Install dependencies
         run: |
-          pip install uv
           uv sync
+          echo "::add-path::$(pwd)/.venv/bin"
       - name: Run tests
         run: |
-          pip install pytest pytest-cov
           pytest tests/
 
 ---
