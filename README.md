@@ -1,6 +1,6 @@
 # 🛡️ Fraud Detection Pipeline: End-to-End MLOps Architecture
 
-[![CI Pipeline](https://github.com/yourusername/Fraud_Detection_Pipeline/actions/workflows/ci.yaml/badge.svg)](https://github.com/yourusername/Fraud_Detection_Pipeline/actions/workflows/ci.yaml)
+[![CI Pipeline](https://github.com/Ranvirsv/fraud-detection-pipeline/actions/workflows/ci.yaml/badge.svg)](https://github.com/Ranvirsv/fraud-detection-pipeline/actions/workflows/ci.yaml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
 ![Serving](https://img.shields.io/badge/FastAPI-0.135-green.svg)
 ![ML Engine](https://img.shields.io/badge/XGBoost-3.2.0-orange.svg)
@@ -13,9 +13,10 @@ An end-to-end Machine Learning pipeline designed to detect fraudulent e-commerce
 The fundamental challenge in transaction fraud detection is the extreme class imbalance (typically < 4% fraud rate in the IEEE-CIS dataset). Traditional machine learning approaches often fail in this domain because they optimize for overall accuracy rather than business outcomes.
 
 This system is architected to address this challenge not just through algorithmic choice, but through systemic design:
-*   Engineering robust features from highly sparse identity and transaction data.
-*   Implementing a training pipeline that optimizes for imbalanced metrics and custom business cost functions (balancing the financial pain of missed fraud against the friction of false alarms).
-*   Enforcing a strict separation of concerns across data extraction, model training, and API serving.
+
+- Engineering robust features from highly sparse identity and transaction data.
+- Implementing a training pipeline that optimizes for imbalanced metrics and custom business cost functions (balancing the financial pain of missed fraud against the friction of false alarms).
+- Enforcing a strict separation of concerns across data extraction, model training, and API serving.
 
 ## 🏗️ Technical Architecture
 
@@ -46,7 +47,7 @@ flowchart TD
         F[Inference Microservice\nFastAPI Endpoint]:::serving
         J[Model Registry\nDVC Tracking]:::storage
     end
-    
+
     subgraph Client Tier
         G[Interactive UI\nStreamlit Dashboard]:::serving
         K[Data Drift Monitoring\nEvidently AI]:::serving
@@ -76,7 +77,7 @@ The data model relies on a one-to-optional joining of transactional events with 
 ```mermaid
 erDiagram
     TRANSACTION ||--o| IDENTITY : "associated with"
-    
+
     TRANSACTION {
         int TransactionID PK
         float TransactionAmt
@@ -85,7 +86,7 @@ erDiagram
         string P_emaildomain "Purchaser Domain"
         int isFraud "Boolean Target"
     }
-    
+
     IDENTITY {
         int TransactionID PK, FK
         string id_01 "Network Telemetry"
@@ -93,14 +94,15 @@ erDiagram
         string DeviceInfo "OS and Browser Signature"
     }
 ```
-*Note: A critical insight driving the feature engineering is that fraudulent transactions possess entirely different missing-data patterns in the `IDENTITY` table compared to legitimate transactions.*
+
+_Note: A critical insight driving the feature engineering is that fraudulent transactions possess entirely different missing-data patterns in the `IDENTITY` table compared to legitimate transactions._
 
 ## 📁 System Modules
 
 ```text
 Fraud_Detection_Pipeline/
 ├── app/                  # Client Tier: Streamlit dashboard for interactive exploration
-├── src/                  
+├── src/
 │   ├── api/              # Serving Tier: FastAPI schemas, routes, and model loaders
 │   ├── etl/              # Data Tier: Ingestion scripts building the DuckDB warehouse
 │   ├── features/         # ML Tier: Transformers mapping raw schema to feature matrix
@@ -129,4 +131,4 @@ make install
 make test
 ```
 
-*Note: Once end-to-end execution scripts are finalized, you will be able to run the full training pipeline and spin up the API+UI with independent `make` commands.*
+_Note: Once end-to-end execution scripts are finalized, you will be able to run the full training pipeline and spin up the API+UI with independent `make` commands._
