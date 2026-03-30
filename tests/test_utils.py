@@ -1,5 +1,3 @@
-from conftest import sample_data
-
 def test_sample_data(sample_data):
     assert sample_data.shape == (5, 3)
     assert sample_data['col1'].dtype == 'int64'
