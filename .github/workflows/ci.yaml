@@ -20,6 +20,7 @@ jobs:
           uv sync
       - name: Run tests
         run: |
+          pip install pytest pytest-cov
           pytest tests/
 
 ---
