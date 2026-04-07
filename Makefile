@@ -12,6 +12,12 @@ lint:
 test:
 	uv run pytest tests/
 
+test-integration:
+	uv run pytest tests/ -m "integration"
+
+test-all:
+	uv run pytest tests/ -m ""
+
 test-cov:
 	uv run pytest --cov=src tests/
 
