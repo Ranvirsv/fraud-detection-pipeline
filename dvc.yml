@@ -1,0 +1,12 @@
+stages:
+  load_data:
+    cmd: make etl
+    deps:
+      - data/raw/train_identity.csv
+      - data/raw/train_transaction.csv
+      - src/etl/loader.py
+      - src/etl/schemas.py
+      - sql/build_warehouse.sql
+    outs:
+      - data/fraud_detection.duckdb
+      - data/processed/analytical.parquet

@@ -12,14 +12,17 @@ lint:
 test:
 	uv run pytest tests/
 
+test-integration:
+	uv run pytest tests/ -m "integration"
+
+test-all:
+	uv run pytest tests/ -m ""
+
 test-cov:
 	uv run pytest --cov=src tests/
 
 etl: 
-	echo "Running ETL..."
+	uv run python src/etl/runner.py
 
 api: 
 	echo "Running API..."
-
-streamlit: 
-	echo "Running Streamlit..."

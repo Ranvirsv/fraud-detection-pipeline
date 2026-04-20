@@ -29,3 +29,15 @@ dependencies = [
     "uvicorn>=0.42.0",
     "xgboost>=3.2.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: tests that require the full dataset",
+]
+addopts = "-m 'not integration'"
+pythonpath = ["."]
