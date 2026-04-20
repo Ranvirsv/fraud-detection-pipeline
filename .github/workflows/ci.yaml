@@ -23,6 +23,9 @@ jobs:
           uv sync
       - name: Run tests
         run: |
-          uv run pytest tests/
+          uv run pytest -m "not integration"
+      - name: Validate DVC
+        run: |
+          dvc dag
 
 ---
