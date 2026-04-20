@@ -26,6 +26,6 @@ jobs:
           uv run pytest -m "not integration"
       - name: Validate DVC
         run: |
-          dvc dag
+          uv run dvc dag
 
 ---
