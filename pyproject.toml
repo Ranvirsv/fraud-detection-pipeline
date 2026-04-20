@@ -40,3 +40,4 @@ markers = [
     "integration: tests that require the full dataset",
 ]
 addopts = "-m 'not integration'"
+pythonpath = ["."]

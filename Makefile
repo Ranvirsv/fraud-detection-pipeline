@@ -22,10 +22,7 @@ test-cov:
 	uv run pytest --cov=src tests/
 
 etl: 
-	echo "Running ETL..."
+	uv run python src/etl/runner.py
 
 api: 
 	echo "Running API..."
-
-streamlit: 
-	echo "Running Streamlit..."

@@ -1,0 +1,8 @@
+stages:
+  load_data:
+    cmd: python src/etl/runner.py
+    deps:
+      - data/raw/train_identity.csv
+      - data/raw/train_transaction.csv
+    outs:
+      - data/fraud_detection.duckdb
